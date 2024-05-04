@@ -1,0 +1,7 @@
+
+•
+java:S6204-"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(†öúš8ÖÑ¿„ð1J$cf0ae003-491f-4423-86f8-2c27532cab3c
+•
+java:S6204M"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(†öúš8ÙÑ¿„ð1J$7bbbb22b-599b-4a1e-b83f-f40bad51bac8
+p
+java:S1144W"-Remove this unused private "buildURL" method.(ºð±÷8ßÑ¿„ð1J$6fc2e50f-434c-43a6-aac9-531f301c777e

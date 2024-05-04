@@ -1,0 +1,7 @@
+
+Ÿ
+java:S1128"WRemove this unused import 'org.springframework.hateoas.config.EnableHypermediaSupport'.(Æ•î»üÿÿÿÿ8˜æß„ğ1J$04599c93-e9a5-408c-ba11-5d2fd02b0fe1
+­
+java:S1128"jRemove this unused import 'org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType.HAL'.(àˆ•¶8˜æß„ğ1J$517063df-d309-4464-a690-2fe1ceeb70ea
+“
+java:S1128"PRemove this unused import 'org.springframework.hateoas.support.WebStack.WEBMVC'.(‘¸ğ8™æß„ğ1J$3b45259b-7248-47b3-af56-485ec41325c8
