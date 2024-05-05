@@ -42,8 +42,11 @@ public class KursWriteService {
 
 
     /**
-     * @param kurs
-     * @return
+     * Einen vorhandenen Kurs aktualisieren
+     * @param kurs Kurs-Objekt ohne ID
+     * @param id ID des Kurses
+     * @throws NotFoundException Keine Kurs-ID gefunden
+     * @throws KursnameExistsException Bereits vorhandener Kursname
      */
     public void update(@Valid final Kurs kurs, final UUID id) {
         log.debug("update: {}", kurs);

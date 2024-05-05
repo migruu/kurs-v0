@@ -36,6 +36,12 @@ class KursWriteController {
     private final KursMapper mapper;
 
 
+    /**
+     * Einen neuen Kurs anlegen.
+     * @param kursDTO Ein Objekt Kurs aus dem Request-Body.
+     * @param request Ein Request-Objekt, um "Location" im Response-Header zu erstellen
+     * @return Response mit Statuscode
+     */
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @Operation(summary = "Einen neuen Kurs anlegen", tags = "Neuanlegen")
     @ApiResponse(responseCode = "201", description = "Kurs neu angelegt")
@@ -51,6 +57,11 @@ class KursWriteController {
         return created(location).build();
     }
 
+    /**
+     * Einen vorhandenen Kurs-Datensatz überschreiben.
+     * @param id ID des zu aktualisierenden Kurses
+     * @param kursDTO Das Kurs-Objekt
+     */
     @PutMapping(path = "{id:" + ID_PATTERN + "}", consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Einen Kurs mit neuen Werten aktualisieren", tags = "Aktualisieren")

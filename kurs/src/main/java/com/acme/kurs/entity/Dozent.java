@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@ToString
 public class Dozent {
 
     /**
@@ -30,8 +32,8 @@ public class Dozent {
 
     /**
      * Liste möglicher Kurse eines Dozenten
+     *     private List<Kurs> kurse;
      */
-    //private List<Kurs> kurse;
 
 
 }

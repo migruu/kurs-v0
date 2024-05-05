@@ -1,13 +1,20 @@
 package com.acme.kurs.rest;
 
-import com.acme.kurs.entity.Dozent;
-
 import java.util.List;
 
-
+/**
+ * ValueObject für das Neuanlegen und Ändern eines Kurses.
+ *
+ * @param kursname Name des Kurses
+ * @param dozent Zugehöriger Dozent
+ * @param ects Anzahl an vergebenden ECTS
+ * @param raumNummer Zugehörige Raumnummer
+ * @param beschreibung Optionale Beschreibung
+ * @param studenten Liste an Studenten
+ */
 record KursDTO(
     String kursname,
-    Dozent dozent,
+    DozentDTO dozent,
     int ects,
     String raumNummer,
     String beschreibung,
