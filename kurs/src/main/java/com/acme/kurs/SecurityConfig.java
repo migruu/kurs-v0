@@ -16,7 +16,6 @@
  */
 package com.acme.kurs;
 
-import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,6 +25,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.List;
+
 import static com.acme.kurs.security.Rolle.ACTUATOR;
 import static com.acme.kurs.security.Rolle.ADMIN;
 import static com.acme.kurs.security.Rolle.KUNDE;
@@ -60,10 +62,10 @@ interface SecurityConfig {
     }
 
     /**
-     * Bean-Definition, um den Verschlüsselungsalgorithmus für Passwörter bereitzustellen. Es wird der
+     * Bean-Definition, um den Verschlüsselungsalgorithmus für Passwoerter bereitzustellen. Es wird der
      * Default-Algorithmus von Spring Security verwendet: bcrypt.
      *
-     * @return Objekt für die Verschlüsselung von Passwörtern.
+     * @return Objekt für die Verschlüsselung von Passwoertern.
      */
     @Bean
     default PasswordEncoder passwordEncoder() {
@@ -71,7 +73,7 @@ interface SecurityConfig {
     }
 
     /**
-     * Bean, um Test-User anzulegen. Dazu gehören jeweils ein Benutzername, ein Passwort und diverse Rollen.
+     * Bean, um Test-User anzulegen. Dazu gehoeren jeweils ein Benutzername, ein Passwort und diverse Rollen.
      * Das wird in Beispiel 2 verbessert werden.
      *
      * @param passwordEncoder Injiziertes Objekt zur Passwort-Verschlüsselung

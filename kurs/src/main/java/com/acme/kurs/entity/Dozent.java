@@ -31,7 +31,7 @@ public class Dozent {
     private String name;
 
     /**
-     * Liste möglicher Kurse eines Dozenten
+     * Liste moeglicher Kurse eines Dozenten
      *     private List<Kurs> kurse;
      */
 

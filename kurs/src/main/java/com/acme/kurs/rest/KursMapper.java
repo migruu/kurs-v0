@@ -4,6 +4,7 @@ package com.acme.kurs.rest;
 import com.acme.kurs.entity.Dozent;
 import com.acme.kurs.entity.Kurs;
 import com.acme.kurs.entity.Student;
+import org.mapstruct.AnnotateWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,6 +12,7 @@ import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
 
 
 @Mapper(nullValueIterableMappingStrategy = RETURN_DEFAULT, componentModel = "spring")
+@AnnotateWith(ExcludeFromJacocoGeneratedReport.class)
 interface KursMapper {
 
     /**

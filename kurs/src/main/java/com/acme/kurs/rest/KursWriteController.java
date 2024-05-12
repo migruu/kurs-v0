@@ -1,14 +1,19 @@
 package com.acme.kurs.rest;
 
+import com.acme.kurs.service.KursReadService;
 import com.acme.kurs.service.KursWriteService;
+import com.acme.kurs.service.KursnameExistsException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +26,7 @@ import java.util.UUID;
 import static com.acme.kurs.rest.KursGetController.ID_PATTERN;
 import static com.acme.kurs.rest.KursGetController.REST_PATH;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 import static org.springframework.http.ResponseEntity.created;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -34,10 +40,13 @@ class KursWriteController {
     private static final String PROBLEM_PATH = "/problem";
     private final KursWriteService service;
     private final KursMapper mapper;
+    private final KursReadService readService;
+    private final UriHelper uriHelper;
 
 
     /**
      * Einen neuen Kurs anlegen.
+     *
      * @param kursDTO Ein Objekt Kurs aus dem Request-Body.
      * @param request Ein Request-Objekt, um "Location" im Response-Header zu erstellen
      * @return Response mit Statuscode
@@ -52,14 +61,16 @@ class KursWriteController {
 
         final var kursInput = mapper.toKurs(kursDTO);
         final var kurs = service.create(kursInput);
-        final var location = URI.create("\"" + request.getRequestURL() + "/" + kurs.getId() + "\"");
+        final var baseUri = uriHelper.getBaseUri(request).toString();
+        final var location = URI.create(baseUri + '/' + kurs.getId());
 
         return created(location).build();
     }
 
     /**
      * Einen vorhandenen Kurs-Datensatz überschreiben.
-     * @param id ID des zu aktualisierenden Kurses
+     *
+     * @param id      ID des zu aktualisierenden Kurses
      * @param kursDTO Das Kurs-Objekt
      */
     @PutMapping(path = "{id:" + ID_PATTERN + "}", consumes = APPLICATION_JSON_VALUE)
@@ -74,6 +85,38 @@ class KursWriteController {
 
         final var kursInput = mapper.toKurs(kursDTO);
         service.update(kursInput, id);
+    }
+
+
+    @ExceptionHandler
+    ProblemDetail onConstraintViolations(
+        final ConstraintViolationException ex,
+        final HttpServletRequest request
+    ) {
+        log.debug("onConstraintViolations: {}", ex.getMessage());
+
+        final var problemDetail = ProblemDetail.forStatusAndDetail(
+            UNPROCESSABLE_ENTITY,
+            // Methodenname und Argumentname entfernen: siehe @Valid in der Service-Klasse
+            ex.getMessage().replace("create.kurs.", "").replace("update.kurs.", "")
+        );
+        problemDetail.setType(URI.create(PROBLEM_PATH + ProblemType.CONSTRAINTS.getValue()));
+        problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
+
+        return problemDetail;
+    }
+
+
+    @ExceptionHandler
+    ProblemDetail onKursnameExists(final KursnameExistsException ex, final HttpServletRequest request) {
+        log.debug("onKursnameExists: {}", ex.getMessage());
+
+        final var problemDetail = ProblemDetail.forStatusAndDetail(UNPROCESSABLE_ENTITY, ex.getMessage());
+
+        problemDetail.setType(URI.create(PROBLEM_PATH + ProblemType.CONSTRAINTS.getValue()));
+        problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
+
+        return problemDetail;
     }
 
 }

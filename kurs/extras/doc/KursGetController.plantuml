@@ -1,0 +1,79 @@
+
+@startuml KursGetController
+
+skinparam classAttributeIconSize 0
+
+package org.springframework {
+    package web.bind.annotation {
+        interface "@RestController" as RestController
+        interface "@RequestMapping" as RequestMapping
+        interface "@PathVariable" as PathVariable
+        interface "@RequestParam" as RequestParam
+        interface "@ExceptionHandler" as ExceptionHandler
+        interface "@ResponseStatus" as ResponseStatus
+    }
+
+    package http {
+        class ResponseEntity<T>
+    }
+
+    package util {
+        class MultiValueMap<K,V>
+        class Collection<T>
+    }
+}
+
+package jakarta.servlet.http {
+    interface HttpServletRequest
+}
+
+package java.util {
+    class UUID
+        UUID .up[hidden].> HttpServletRequest
+}
+
+package com.acme.kurs {
+    package service {
+        class KursReadService << control >> << @Service >>
+        class NotFoundException
+    }
+
+    package rest #DDDDDD {
+        class Kurs <<entity>>
+
+        class KursGetController << boundary >> << @RestController >> << @RequestMapping >> {
+            + @GetMapping getById(@PathVariable id: UUID, request: HttpServletRequest): Kurs
+            + @GetMapping get(@RequestParam queryParams: MultiValueMap<String, String>, request: HttpServletRequest): Collection<Kurs>
+        }
+
+        class CommonExceptionHandler << @ControllerAdvice >> {
+            + @ExceptionHandler @ResponseStatus onNotFound(ex: NotFoundException)
+        }
+
+        KursGetController o--> "1" KursReadService : service
+        KursGetController ..> Kurs
+
+        KursGetController .up.> RestController
+        KursGetController .up.> RequestMapping
+        KursGetController .up.> PathVariable
+        KursGetController .up.> RequestParam
+        KursGetController .up.> ResponseEntity
+        KursGetController .up.> MultiValueMap
+        KursGetController .right.> HttpServletRequest
+
+        CommonExceptionHandler .up.> ExceptionHandler
+        CommonExceptionHandler .up.> ResponseStatus
+        CommonExceptionHandler ..> NotFoundException
+        CommonExceptionHandler .up[hidden].> Kurs
+
+        KursGetController .right.> UUID
+
+        Kurs ..> KursReadService
+    }
+}
+
+hide empty members
+
+footer (c) Miguel Rasch
+
+@enduml

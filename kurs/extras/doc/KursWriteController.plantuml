@@ -1,0 +1,93 @@
+
+@startuml KursWriteController
+
+skinparam classAttributeIconSize 0
+
+package org.springframework {
+package stereotype {
+        interface "@Controller" as Controller
+    }
+
+    package web.bind.annotation {
+        interface "@RequestMapping" as RequestMapping
+        interface "@PathVariable" as PathVariable
+        interface "@RequestBody" as RequestBody
+        interface "@ExceptionHandler" as ExceptionHandler
+    }
+
+    package http {
+        class ResponseEntity<T>
+        class ProblemDetail
+
+        package converter {
+            class HttpMessageNotReadableException
+        }
+
+        ResponseEntity .[hidden].> ProblemDetail
+        ProblemDetail .[hidden].> HttpMessageNotReadableException
+    }
+}
+
+package jakarta.servlet.http {
+    interface HttpServletRequest
+}
+
+package java.util {
+    interface Collection<T>
+    class UUID
+
+    UUID .up[hidden].> Collection
+    Collection .up[hidden].> HttpServletRequest
+}
+
+package com.acme.kurs {
+    package service {
+        class KursWriteService << control >> << @Service >>
+
+        class KursnameExistsException
+    }
+
+    package rest #DDDDDD {
+        package patch {
+            class PatchOperation <<entity>>
+        }
+
+        class KursDTO <<entity>>
+
+        class KursWriteController << boundary >> << @Controller >> << @RequestMapping >> {
+            + @PostMapping post(@RequestBody KursDTO: KursDTO, request: HttpServletRequest): ResponseEntity<Void>
+            + @PutMapping put(@PathVariable id: UUID, @RequestBody KursDTO: KursDTO)
+            + @PatchMapping patch(@PathVariable id: UUID, @RequestBody patchOps: Collection<PatchOperation>)
+            + @DeleteMapping deleteById(@PathVariable id: UUID)
+            + @ExceptionHandler onEmailExists(ex: KursnameExistsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onMessageNotReadable(ex: HttpMessageNotReadableException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+        }
+
+        KursWriteController o-down-> "1" KursWriteService : service
+        KursWriteController ..> KursDTO
+        KursWriteController ..> KursnameExistsException
+        KursWriteController ..> PatchOperation
+
+        KursWriteController .up.> ResponseEntity
+        KursWriteController .up.> ProblemDetail
+        KursWriteController .up.> HttpMessageNotReadableException
+        KursWriteController .right.> HttpServletRequest
+
+        KursWriteController .up.> Controller
+        KursWriteController .up.> RequestMapping
+        KursWriteController .up.> PathVariable
+        KursWriteController .up.> RequestBody
+        KursWriteController .up.> ExceptionHandler
+
+        KursWriteController .right.> UUID
+        KursWriteController .right.> Collection
+
+        PatchOperation .[hidden].> KursWriteService
+    }
+}
+
+hide empty members
+
+footer (c) Miguel Rasch
+
+@enduml

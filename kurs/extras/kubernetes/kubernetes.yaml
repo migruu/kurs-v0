@@ -312,7 +312,7 @@ spec:
         - name: log-kurs-v1
           # https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
           hostPath:
-            path: /run/desktop/mnt/host/c/Zimmermann/volumes/kurs-v1
+            path: /run/desktop/mnt/host/c/Zimmermann/volumes/kurs-v0
             type: Directory
           # https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
           #emptyDir: {}

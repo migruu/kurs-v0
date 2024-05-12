@@ -1,0 +1,47 @@
+
+@startuml Kurs
+
+skinparam classAttributeIconSize 0
+' skinparam monochrome true
+
+package java {
+    package util {
+        class UUID
+        interface List<T>
+    }
+}
+
+package com.acme.kurs.entity #DDDDDD {
+    class Student << entitiy >> {
+        name: String
+        matrikelNr: String
+    }
+
+    class Dozent << entitiy >> {
+        id: UUID
+        name: String
+    }
+
+    class Kurs << entity >> {
+        id: UUID
+        kursName: String
+        dozent: Dozent
+        ects: int
+        raumNummer: String
+        beschreibung: String
+        studenten: List<Student>
+    }
+
+    Kurs *--*"0..*" Student : studenten
+    Kurs *--> "1..n" Dozent : dozent
+
+
+    Kurs ..> UUID
+    Kurs ..> List
+}
+
+hide empty members
+
+footer (c) Miguel Rasch
+
+@enduml

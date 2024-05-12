@@ -3,6 +3,7 @@ package com.acme.kurs.repository;
 import com.acme.kurs.entity.Dozent;
 import com.acme.kurs.entity.Student;
 import com.acme.kurs.entity.Kurs;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -10,8 +11,10 @@ import java.util.stream.Stream;
 
 final class DB {
 
+    /**
+     * private constructor to prevent instantiation
+     */
     private DB() {
-        // private constructor to prevent instantiation
     }
 
     /**
@@ -21,6 +24,7 @@ final class DB {
 
     /**
      * Erstellung der Liste von Studenten
+     *
      * @return Liste
      */
     private static List<Student> getStudents() {
@@ -52,6 +56,7 @@ final class DB {
 
     /**
      * Erstellung der Kurse für Datenbank
+     *
      * @return Liste an Kursen
      */
     private static List<Kurs> getKurse() {

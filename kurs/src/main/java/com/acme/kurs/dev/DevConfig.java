@@ -33,6 +33,9 @@ public class DevConfig implements LogRequestHeaders, K8s {
      */
     public static final String DEV = "dev";
 
+    /**
+     * DevConfig
+     */
     DevConfig() {
     }
 }

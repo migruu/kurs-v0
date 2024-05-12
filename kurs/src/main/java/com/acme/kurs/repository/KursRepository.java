@@ -1,5 +1,6 @@
 package com.acme.kurs.repository;
 
+import com.acme.kurs.entity.Kurs;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -13,10 +14,8 @@ import java.util.OptionalInt;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
-import com.acme.kurs.entity.Kurs;
-
-import static java.util.Collections.emptyList;
 import static com.acme.kurs.repository.DB.KURSE;
+import static java.util.Collections.emptyList;
 
 
 /**
@@ -130,7 +129,7 @@ public class KursRepository {
     }
 
     /**
-     * Kurse ausgeben anhand der ECTS Höhe
+     * Kurse ausgeben anhand der ECTS Hoehe
      *
      * @param ects Ects Integer
      * @return Liste an Kursen mit gegebener ECTS Anzahl

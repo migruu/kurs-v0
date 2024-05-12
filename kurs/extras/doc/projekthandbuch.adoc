@@ -1,19 +1,6 @@
-// Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 = Projekthandbuch
-Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
+Miguel Rasch
 :doctype: book
 :toc: left
 :sectanchors:
@@ -29,18 +16,14 @@ Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
 // http://de.plantuml.com/component.html
 // https://github.com/odrotbohm/asciidoctor-plantuml
 
-IMPORTANT: Copyright (C) 2015 - present Jürgen Zimmermann, Hochschule Karlsruhe. +
-           Free use of this software is granted under the terms of the
-           GNU General Public License (GPL) v3. +
-           For the full text of the license, see the http://www.gnu.org/licenses/gpl-3.0.html[license] file.
 
-== Der Microservice Kunde
+== Der Microservice Kurs
 
 === Der Microservice im Überblick
 
 bla bla
 
-.Use Cases für den Microservice "kunde"
+.Use Cases für den Microservice "kurs"
 [plantuml,use-cases,svg]
 ----
 include::./use-cases.plantuml[]
@@ -48,7 +31,7 @@ include::./use-cases.plantuml[]
 
 bla bla
 
-.Komponenten des Microservice "kunde"
+.Komponenten des Microservice "kurs"
 [plantuml,komponenten,svg]
 ----
 include::./komponenten.plantuml[]
@@ -58,16 +41,10 @@ include::./komponenten.plantuml[]
 
 bla bla
 
-."KundeGetController" für Lesezugriffe an der REST-Schnittstelle
-[plantuml,KundeGetController,svg]
+."KursGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,KursGetController,svg]
 ----
-include::./KundeGetController.plantuml[]
-----
-
-.Die Klasse "KundeModel" für den Datenaustausch bei GET
-[plantuml,KundeModel,svg]
-----
-include::./KundeModel.plantuml[]
+include::./KursGetController.plantuml[]
 ----
 
 ."Sequenzdiagramm" mit den Methodenaufrufen
@@ -76,38 +53,38 @@ include::./KundeModel.plantuml[]
 include::sequenzdiagramm.plantuml[]
 ----
 
-."KundeWriteController" für Schreibzugriffe an der REST-Schnittstelle
-[plantuml,KundeWriteController,svg]
+."KursWriteController" für Schreibzugriffe an der REST-Schnittstelle
+[plantuml,KursWriteController,svg]
 ----
-include::./KundeWriteController.plantuml[]
+include::./KursWriteController.plantuml[]
 ----
 
 === Die Geschäftslogik
 
 bla bla
 
-.Die Service-Klasse "KundeReadService" für die Geschäftslogik
-[plantuml,KundeReadService,svg]
+.Die Service-Klasse "KursReadService" für die Geschäftslogik
+[plantuml,KursReadService,svg]
 ----
-include::./KundeReadService.plantuml[]
+include::./KursReadService.plantuml[]
 ----
 
 bla bla
 
-.Die Service-Klasse "KundeWriteService" für die Geschäftslogik
-[plantuml,KundeWriteService,svg]
+.Die Service-Klasse "KursWriteService" für die Geschäftslogik
+[plantuml,KursWriteService,svg]
 ----
-include::./KundeWriteService.plantuml[]
+include::./KursWriteService.plantuml[]
 ----
 
 === Die Entity-Klassen
 
 bla bla
 
-.Die Entity-Klasse "Kunde" für Kundendaten
-[plantuml,Kunde,svg]
+.Die Entity-Klasse "Kurs" für Kursdaten
+[plantuml,Kurs,svg]
 ----
-include::./Kunde.plantuml[]
+include::./Kurs.plantuml[]
 ----
 
 == Programmierrichtlinien

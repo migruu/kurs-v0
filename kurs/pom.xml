@@ -1128,7 +1128,7 @@
                         -->
                         <buildpacks>
                             <buildpack>paketobuildpacks/azul-zulu</buildpack>
-                            <buildpack>paketobuildpacks/java</buildpack>
+                            <buildpack>paketobuildpacks/java:12.1</buildpack>
                         </buildpacks>
 
                         <!-- Eclipse Temurin: JRE 8, 11, 17 (default, siehe buildpack.toml), 21 -->

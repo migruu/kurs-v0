@@ -37,7 +37,7 @@ public class Kurs {
     private String kursName;
 
     /**
-     * Name des Dozenten für den zugehörigen Kurs
+     * Name des Dozenten für den zugehoerigen Kurs
      */
     private Dozent dozent;
 
@@ -54,7 +54,7 @@ public class Kurs {
     private String raumNummer;
 
     /**
-     * Eine Möglichkeit für eine kurze Kursbeschreibung.
+     * Eine Moeglichkeit für eine kurze Kursbeschreibung.
      */
     private String beschreibung;
 
@@ -64,6 +64,4 @@ public class Kurs {
     @ToString.Exclude
     @UniqueElements
     private List<Student> studenten;
-
-
 }

@@ -1,0 +1,41 @@
+
+@startuml KursWriteService
+
+skinparam classAttributeIconSize 0
+
+package org.springframework.stereotype {
+    interface Service
+}
+
+package java.util {
+    class UUID
+}
+
+package com.acme.kurs {
+    package entity {
+        class Kurs << entity >>
+    }
+
+    package repository {
+        class KursRepository << control >> << @Repository >>
+    }
+
+    package service #DDDDDD {
+        class KursWriteService << control >> << @Service >> {
+            + create(kurs: Kurs): Kunde
+            + update(kurs: Kurs, id: UUID)
+            + deleteById(id: UUID)
+        }
+
+        KursWriteService o--> "1" KursRepository : repo
+        KursWriteService .right.> Kurs
+        KursWriteService .up.> Service
+        KursWriteService .up.> UUID
+    }
+}
+
+hide empty members
+
+footer (c) Miguel Rasch
+
+@enduml

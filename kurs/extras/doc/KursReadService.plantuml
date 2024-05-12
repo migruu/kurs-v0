@@ -1,0 +1,48 @@
+
+@startuml KursReadService
+
+skinparam classAttributeIconSize 0
+
+package org.springframework.stereotype {
+    interface Service
+}
+
+package java.util {
+    interface List<T>
+    interface Map<K,V>
+    class UUID
+
+    UUID .left[hidden].> Service
+}
+
+package com.acme.kurs {
+    package entity {
+        class Kurs << entity >>
+
+        Kurs .up[hidden].> List
+    }
+
+    package repository {
+        class KursRepository << control >> << @Repository >>
+    }
+
+    package service #DDDDDD {
+        class KursReadService << control >> << @Service >> {
+            + findById(id: UUID): Kurs
+            + find(queryParams: Map<String, String>): List<Kurs>
+        }
+
+        KursReadService o--> KursRepository : repo
+        KursReadService .right.> Kurs
+        KursReadService ..> Service
+        KursReadService .up.> UUID
+        KursReadService .up> List
+        KursReadService .up.> Map
+    }
+}
+
+hide empty members
+
+footer (c) Miguel Rasch
+
+@enduml
